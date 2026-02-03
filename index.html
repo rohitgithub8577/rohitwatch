@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YUSUF TIMEPIECES</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --primary: #0f1115;
+            --secondary: #1c1f26;
+            --accent: #d4af37;
+            --text-light: #f4f4f4;
+            --text-dark: #2c2c2c;
+            --font-heading: 'Cinzel', serif;
+            --font-sub: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --transition: all 0.4s ease;
+        }
+
+        /* --- RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); background-color: #f9f9f9; color: var(--text-dark); line-height: 1.7; overflow-x: hidden; padding-bottom: 80px; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+        h1, h2, h3, h4 { font-family: var(--font-heading); letter-spacing: 1px; }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 25px; }
+        .section-padding { padding: 90px 0; }
+        .text-center { text-align: center; }
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--accent);
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 0; height: 100%;
+            background-color: var(--primary); z-index: -1; transition: var(--transition);
+        }
+        .btn:hover::before { width: 100%; }
+        .btn:hover { color: var(--accent); }
+        .btn-danger { background-color: #dc3545; color: white; padding: 8px 15px; font-size: 0.8rem; }
+        .btn-danger:hover { background-color: #a71d2a; color: white; }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--primary);
+            color: var(--text-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .navbar { display: flex; justify-content: space-between; align-items: center; height: 100px; }
+        .logo { font-size: 1.8rem; font-weight: 900; color: var(--accent); letter-spacing: 2px; }
+        
+        .nav-links { display: flex; gap: 45px; }
+        .nav-item {
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
+            cursor: pointer; position: relative; font-weight: 500;
+        }
+        .nav-item::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
+            background-color: var(--accent); transition: var(--transition);
+        }
+        .nav-item:hover::after, .nav-item.active::after { width: 100%; }
+        .nav-item:hover, .nav-item.active { color: var(--accent); }
+
+        .nav-icons i { font-size: 1.2rem; margin-left: 25px; cursor: pointer; transition: 0.3s; }
+        .nav-icons i:hover { color: var(--accent); }
+        .cart-badge {
+            position: absolute; top: -10px; right: -5px;
+            background: var(--accent); color: var(--primary);
+            font-size: 0.65rem; width: 18px; height: 18px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; font-weight: 800;
+        }
+        .hamburger { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- TABS --- */
+        .tab-section { display: none; animation: fadeIn 0.8s ease; }
+        .tab-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .section-header { margin-bottom: 60px; text-align: center; }
+        .section-header h2 { font-size: 3rem; margin-bottom: 15px; color: var(--primary); }
+        .section-header p { font-size: 1.1rem; color: #666; font-family: var(--font-sub); font-style: italic; }
+        .gold-line { width: 80px; height: 3px; background: var(--accent); margin: 20px auto; }
+
+        /* --- HOME --- */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            color: #fff;
+        }
+        .hero h1 { font-size: 4.5rem; margin-bottom: 20px; line-height: 1.1; }
+        .hero p { font-size: 1.3rem; margin-bottom: 40px; font-weight: 300; letter-spacing: 1px; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+        .owner-quote {
+            background: #fff; padding: 60px; border-left: 5px solid var(--accent);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin: -80px auto 80px; position: relative; z-index: 10;
+        }
+        .owner-quote i { color: var(--accent); font-size: 2rem; margin-bottom: 20px; }
+        .quote-text { font-family: var(--font-sub); font-size: 1.5rem; font-style: italic; margin-bottom: 20px; }
+        .owner-name { font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); }
+
+        /* --- CATEGORIES SECTION --- */
+        .cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 80px; }
+        .cat-card {
+            position: relative; height: 250px; overflow: hidden; border-radius: 4px; cursor: pointer;
+        }
+        .cat-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .cat-overlay {
+            position: absolute; inset: 0; background: rgba(0,0,0,0.4);
+            display: flex; align-items: center; justify-content: center; transition: 0.3s;
+        }
+        .cat-overlay h3 { color: #fff; font-size: 1.5rem; border: 1px solid #fff; padding: 10px 20px; }
+        .cat-card:hover img { transform: scale(1.1); }
+        .cat-card:hover .cat-overlay { background: rgba(0,0,0,0.6); }
+
+        /* --- SHOP & CART --- */
+        .shop-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; }
+        
+        .product-card {
+            background: #fff; transition: 0.4s; border: 1px solid #eee; position: relative;
+        }
+        .product-card:hover { border-color: var(--accent); transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .prod-img-wrap { position: relative; height: 280px; overflow: hidden; }
+        .prod-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .product-card:hover .prod-img-wrap img { transform: scale(1.1); }
+        
+        .prod-body { padding: 25px 20px; text-align: center; }
+        .prod-cat { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
+        .prod-title { font-size: 1.2rem; margin-bottom: 10px; font-weight: 700; height: 50px; overflow: hidden; }
+        .prod-price { color: var(--accent); font-size: 1.3rem; font-weight: 600; margin-bottom: 15px; }
+        
+        /* Specs Table */
+        .specs-table {
+            width: 100%; margin-bottom: 20px; font-size: 0.75rem; border-top: 1px solid #eee;
+        }
+        .specs-table td { padding: 6px 0; color: #555; }
+        .specs-table td:first-child { font-weight: 600; width: 40%; color: #333; }
+
+        /* --- CART TAB STYLES --- */
+        .cart-wrapper {
+            background: #fff; padding: 40px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .cart-table {
+            width: 100%; border-collapse: collapse; margin-bottom: 30px;
+        }
+        .cart-table th {
+            text-align: left; padding: 15px; border-bottom: 2px solid var(--accent);
+            font-family: var(--font-heading); color: var(--primary);
+        }
+        .cart-table td {
+            padding: 15px; border-bottom: 1px solid #eee; vertical-align: middle;
+        }
+        .cart-img { width: 60px; height: 60px; object-fit: cover; border-radius: 4px; border: 1px solid #ddd; }
+        .cart-total-box {
+            text-align: right; padding-top: 20px; border-top: 2px solid #333;
+        }
+        .total-price {
+            font-size: 2rem; color: var(--accent); font-family: var(--font-heading);
+        }
+        .empty-cart-msg {
+            text-align: center; padding: 50px; color: #888;
+        }
+        .empty-cart-msg i { font-size: 4rem; color: #ddd; margin-bottom: 20px; }
+
+        /* --- BLOG --- */
+        .blog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 50px; }
+        .blog-card {
+            background: #fff; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: 0.4s;
+            display: flex; flex-direction: column; height: 100%;
+        }
+        .blog-card:hover { transform: translateY(-5px); }
+        .blog-img { height: 250px; overflow: hidden; }
+        .blog-img img { width: 100%; height: 100%; object-fit: cover; }
+        .blog-content { padding: 35px; flex-grow: 1; display: flex; flex-direction: column; }
+        .blog-meta { font-size: 0.8rem; color: #999; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .blog-title { font-size: 1.6rem; margin-bottom: 15px; line-height: 1.3; color: var(--primary); }
+        .blog-excerpt { color: #555; margin-bottom: 25px; font-size: 1rem; line-height: 1.8; }
+        .read-more { margin-top: auto; color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+
+        /* --- ABOUT --- */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 80px; }
+        .about-img img { border-radius: 5px; box-shadow: 20px 20px 0 var(--accent); }
+        .about-text h3 { font-size: 2rem; margin-bottom: 25px; color: var(--primary); }
+        .about-text p { margin-bottom: 20px; color: #444; text-align: justify; }
+
+        /* --- CONTACT --- */
+        .contact-box { background: #fff; padding: 50px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+        .info-item { display: flex; margin-bottom: 30px; align-items: center; }
+        .info-icon { width: 60px; height: 60px; background: var(--primary); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-right: 25px; border-radius: 50%; flex-shrink: 0; }
+        
+        /* --- FOOTER --- */
+        footer { background: var(--primary); color: #aaa; padding: 80px 0 30px; margin-top: 80px; border-top: 4px solid var(--accent); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; margin-bottom: 60px; }
+        .footer h4 { color: #fff; font-size: 1.2rem; margin-bottom: 25px; letter-spacing: 1px; }
+        .footer ul li { margin-bottom: 12px; }
+        .footer ul li a:hover { color: var(--accent); padding-left: 5px; }
+        .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-size: 0.85rem; }
+
+        /* Toast */
+        #toast {
+            visibility: hidden; min-width: 280px; background-color: var(--primary); color: #fff; text-align: center;
+            border-radius: 4px; padding: 16px; position: fixed; z-index: 2000; left: 50%; bottom: 30px;
+            transform: translateX(-50%); box-shadow: 0 5px 20px rgba(0,0,0,0.3); border-left: 4px solid var(--accent);
+        }
+        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+
+        /* --- WHATSAPP FLOAT BUTTON --- */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128c7e;
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .blog-grid { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3rem; }
+            .cat-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 100px; left: 0; width: 100%; background: var(--primary); flex-direction: column; padding: 30px; text-align: center; }
+            .nav-links.active { display: flex; }
+            .hamburger { display: block; }
+            .owner-quote { margin: 0 auto 50px; padding: 30px; }
+            .cart-table thead { display: none; }
+            .cart-table td { display: block; text-align: center; padding: 20px; }
+            .cart-img { margin: 0 auto 10px; }
+            .cat-grid { grid-template-columns: 1fr; }
+            .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container navbar">
+            <div class="logo">YUSUF <span style="color: #fff; font-weight: 300;">TIMEPIECES</span></div>
+            
+            <ul class="nav-links">
+                <li class="nav-item active" data-target="home">Home</li>
+                <li class="nav-item" data-target="shop">Collection</li>
+                <li class="nav-item" data-target="about">About Yusuf</li>
+                <li class="nav-item" data-target="blog">Journal</li>
+                <li class="nav-item" data-target="contact">Contact</li>
+                <li class="nav-item" data-target="cart">Cart (<span id="nav-cart-count">0</span>)</li>
+            </ul>
+
+            <div class="nav-icons">
+                <div style="position: relative; cursor: pointer;" class="nav-trigger" data-target="cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge" id="header-cart-count">0</span>
+                </div>
+                <div class="hamburger"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HOME TAB -->
+        <section id="home" class="tab-section active">
+            <div class="hero">
+                <div class="container">
+                    <h1>Time is Precious.<br>Make it Luxury.</h1>
+                    <p>Curating finest Swiss and German timepieces in Mumbai.</p>
+                    <button class="btn nav-trigger" data-target="shop">Explore Collection</button>
+                </div>
+            </div>
+
+            <div class="container">
+                <!-- Owner Quote -->
+                <div class="owner-quote">
+                    <i class="fas fa-quote-left"></i>
+                    <p class="quote-text">"A watch is not just a device to tell time. It is a piece of engineering art that tells the world who you are."</p>
+                    <div class="owner-name">- Yusuf, Proprietor</div>
+                </div>
+
+                <!-- NEW: CATEGORY GRID -->
+                <div class="section-header">
+                    <h2>Browse by Category</h2>
+                    <div class="gold-line"></div>
+                </div>
+                <div class="cat-grid">
+                    <div class="cat-card nav-trigger" data-target="shop">
+                        <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=1000" alt="Luxury">
+                        <div class="cat-overlay"><h3>Luxury</h3></div>
+                    </div>
+                    <div class="cat-card nav-trigger" data-target="shop">
+                        <img src="https://images.unsplash.com/photo-1594534475808-b18fc33b045e?q=80&w=1000" alt="Diver">
+                        <div class="cat-overlay"><h3>Diver</h3></div>
+                    </div>
+                    <div class="cat-card nav-trigger" data-target="shop">
+                        <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=1000" alt="Classic">
+                        <div class="cat-overlay"><h3>Classic</h3></div>
+                    </div>
+                    <div class="cat-card nav-trigger" data-target="shop">
+                        <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1000" alt="Pilot">
+                        <div class="cat-overlay"><h3>Pilot</h3></div>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <h2>Featured Arrivals</h2>
+                    <div class="gold-line"></div>
+                    <p>Hand-picked selection available at Deewan Center, Jogeshwari.</p>
+                </div>
+
+                <div class="shop-container">
+                    <!-- Product 1 -->
+                    <div class="product-card" data-name="The Royal Oak Tribute" data-price="3500" data-img="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=1000&auto=format&fit=crop">
+                        <div class="prod-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=1000&auto=format&fit=crop" alt="Luxury Watch">
+                        </div>
+                        <div class="prod-body">
+                            <div class="prod-cat">Chronograph</div>
+                            <h3 class="prod-title">The Royal Oak Tribute</h3>
+                            <div class="prod-price">₹ 3500</div>
+                            <table class="specs-table">
+                                <tr><td>Movement</td><td>Automatic</td></tr>
+                                <tr><td>Case Size</td><td>41mm</td></tr>
+                            </table>
+                            <button class="btn btn-sm add-to-cart" style="width:100%">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card" data-name="Silver Datejust" data-price="1200" data-img="https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=1000&auto=format&fit=crop">
+                        <div class="prod-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=1000&auto=format&fit=crop" alt="Silver Watch">
+                        </div>
+                        <div class="prod-body">
+                            <div class="prod-cat">Classic</div>
+                            <h3 class="prod-title">Silver Datejust</h3>
+                            <div class="prod-price">₹ 1200</div>
+                            <table class="specs-table">
+                                <tr><td>Movement</td><td>Perpetual</td></tr>
+                                <tr><td>Bezel</td><td>Fluted</td></tr>
+                            </table>
+                            <button class="btn btn-sm add-to-cart" style="width:100%">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="product-card" data-name="Ocean Master Black" data-price="2850" data-img="https://images.unsplash.com/photo-1594534475808-b18fc33b045e?q=80&w=1000&auto=format&fit=crop">
+                        <div class="prod-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1594534475808-b18fc33b045e?q=80&w=1000&auto=format&fit=crop" alt="Dive Watch">
+                        </div>
+                        <div class="prod-body">
+                            <div class="prod-cat">Diver</div>
+                            <h3 class="prod-title">Ocean Master Black</h3>
+                            <div class="prod-price">₹ 2850</div>
+                            <table class="specs-table">
+                                <tr><td>Movement</td><td>Automatic</td></tr>
+                                <tr><td>Lume</td><td>SuperLuminova</td></tr>
+                            </table>
+                            <button class="btn btn-sm add-to-cart" style="width:100%">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="product-card" data-name="Titanium Pro" data-price="1500" data-img="https://images.unsplash.com/photo-1587836374621-25150d3aa492?q=80&w=1000&auto=format&fit=crop">
+                        <div class="prod-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1622434641406-a158123450f9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8V2F0Y2h8ZW58MHx8MHx8fDA%3D" alt="Smart Watch">
+                        </div>
+                        <div class="prod-body">
+                            <div class="prod-cat">Sport</div>
+                            <h3 class="prod-title">Titanium Pro</h3>
+                            <div class="prod-price">₹ 1500</div>
+                            <table class="specs-table">
+                                <tr><td>Movement</td><td>Quartz</td></tr>
+                                <tr><td>Case</td><td>Titanium</td></tr>
+                            </table>
+                            <button class="btn btn-sm add-to-cart" style="width:100%">Add to Cart</button>
+                        </div>
+                    </div>
+
+
+                    <div class="product-card" data-name="Titanium Pro" data-price="1749" data-img="https://images.unsplash.com/photo-1587836374621-25150d3aa492?q=80&w=1000&auto=format&fit=crop">
+                        <div class="prod-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fFdhdGNofGVufDB8fDB8fHww" alt="Smart Watch">
+                        </div>
+                        <div class="prod-body">
+                            <div class="prod-cat">Rolex</div>
+                            <h3 class="prod-title">Diving / Luxury</h3>
+                            <div class="prod-price">₹ 1749</div>
+                            <table class="specs-table">
+                                <tr><td>Movement</td><td>Quartz</td></tr>
+                                <tr><td>Case</td><td>Yellow Rolesor</td></tr>
+                            </table>
+                            <button class="btn btn-sm add-to-cart" style="width:100%">Add to Cart</button>
+                        </div>
+                    </div>
+
+
+                    <div class="product-card" data-name="Titanium Pro" data-price="999" data-img="https://images.unsplash.com/photo-1587836374621-25150d3aa492?q=80&w=1000&auto=format&fit=crop">
+                        <div class="prod-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1634141628215-732e10d16bec?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDB8fFdhdGNofGVufDB8fDB8fHww" alt="Smart Watch">
+                        </div>
+                        <div class="prod-body">
+                            <div class="prod-cat">Sport</div>
+                            <h3 class="prod-title">Omega</h3>
+                            <div class="prod-price">₹ 999</div>
+                            <table class="specs-table">
+                                <tr><td>Movement</td><td>Speedmaster '57</td></tr>
+                                <tr><td>Case</td><td>Steel</td></tr>
+                            </table>
+                            <button class="btn btn-sm add-to-cart" style="width:100%">Add to Cart</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SHOP TAB -->
+        <section id="shop" class="tab-section">
+            <div class="container section-padding">
+                <div class="section-header">
+                    <h2>Complete Collection</h2>
+                    <div class="gold-line"></div>
+                    <p>Original watches with bill and warranty. Huge variety available.</p>
+                </div>
+
+                <div class="shop-container">
+                    <!-- 1 -->
+                    <div class="product-card" data-name="Royal Oak Gold" data-price="1249" data-img="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=1000">
+                        <div class="prod-img-wrap"><img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=1000" alt="Watch"></div>
+                        <div class="prod-body">
+                            <div class="prod-cat">Luxury</div>
+                            <h3 class="prod-title">Royal Oak Gold</h3>
+                            <div class="prod-price">₹ 1249</div>
+                            <table class="specs-table"><tr><td>Case</td><td>18k Gold</td></tr></table>
+                            <button class="btn btn-sm add-to-cart" style="width:100%">Add to Cart</button>
+                        </div>
+                    </div>
+                    <!-- 2 -->
+                    <div class="product-card" data-name="Sapphire Blue" data-price="549" data-img="https://images.unsplash.com/photo-1539874754764-5a96559165b0?q=80&w=1000">
+                        <div class="prod-img-wrap"><img src="https://images.unsplash.com/photo-1539874754764-5a96559165b0?q=80&w=1000" alt="Watch"></div>
+                        <div class="prod-body">
+                            <div class="prod-cat">Sport</div>
+                            <h3 class="prod-title">Sapphire Blue</h3>
+                            <div class="prod-price">₹ 549</div>
+                            <table class="specs-table"><tr><td>Strap</td><td>Rubber</td></tr></table>
+                            <button class="btn btn-sm add-to-cart" style="width:100%">Add to Cart</button>
+                        </div>
+                    </div>
+                    <!-- 3 -->
+                    <div class="product-card" data-name="Big Pilot Heritage" data-price="899" data-img="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1000">
+                        <div class="prod-img-wrap"><img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1000" alt="Watch"></div>
+                        <div class="prod-body">
+                            <div class="prod-cat">Pilot</div>
+                            <h3 class="prod-title">Big Pilot Heritage</h3>
+                            <div class="prod-price">₹ 899</div>
+                            <table class="specs-table"><tr><td>Movement</td><td>Hand-Wound</td></tr></table>
+                            <button class="btn btn-sm add-to-cart" style="width:100%">Add to Cart</button>
+                        </div>
+                    </div>
+                    <!-- 4 (New Variety) -->
+                    <div class="product-card" data-name="Vintage 1965" data-price="1199" data-img="https://images.unsplash.com/photo-1524805444758-089113d48a6d?q=80&w=1000">
+                        <div class="prod-img-wrap"><img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?q=80&w=1000" alt="Watch"></div>
+                        <div class="prod-body">
+                            <div class="prod-cat">Vintage</div>
+                            <h3 class="prod-title">Vintage 1965</h3>
+                            <div class="prod-price">₹ 1199</div>
+                            <table class="specs-table"><tr><td>Condition</td><td>Mint</td></tr></table>
+                            <button class="btn btn-sm add-to-cart" style="width:100%">Add to Cart</button>
+                        </div>
+                    </div>
+                    <!-- 5 (New Variety) -->
+                    <div class="product-card" data-name="Midnight Blue" data-price="1849" data-img="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000">
+                        <div class="prod-img-wrap"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000" alt="Watch"></div>
+                        <div class="prod-body">
+                            <div class="prod-cat">Minimalist</div>
+                            <h3 class="prod-title">Midnight Blue</h3>
+                            <div class="prod-price">₹ 1849</div>
+                            <table class="specs-table"><tr><td>Dial</td><td>Sunburst</td></tr></table>
+                            <button class="btn btn-sm add-to-cart" style="width:100%">Add to Cart</button>
+                        </div>
+                    </div>
+                     <!-- 6 (New Variety) -->
+                     <div class="product-card" data-name="Chrono Steel" data-price="299" data-img="https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?q=80&w=1000">
+                        <div class="prod-img-wrap"><img src="https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?q=80&w=1000" alt="Watch"></div>
+                        <div class="prod-body">
+                            <div class="prod-cat">Chronograph</div>
+                            <h3 class="prod-title">Chrono Steel</h3>
+                            <div class="prod-price">₹ 299</div>
+                            <table class="specs-table"><tr><td>Bezel</td><td>Tachymeter</td></tr></table>
+                            <button class="btn btn-sm add-to-cart" style="width:100%">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CART TAB -->
+        <section id="cart" class="tab-section">
+            <div class="container section-padding">
+                <div class="section-header">
+                    <h2>Your Cart</h2>
+                    <div class="gold-line"></div>
+                    <p>Review your selected timepieces.</p>
+                </div>
+
+                <div class="cart-wrapper">
+                    <div id="cart-content"></div>
+                    
+                    <div class="cart-total-box">
+                        <h3>Total Amount</h3>
+                        <div class="total-price" id="cart-total">₹ 0</div>
+                        <br>
+                        <button class="btn" id="checkout-btn" disabled>Proceed to Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT TAB -->
+        <section id="about" class="tab-section">
+            <div class="container section-padding">
+                <div class="section-header">
+                    <h2>Meet Yusuf</h2>
+                    <div class="gold-line"></div>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-img">
+                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=1000&auto=format&fit=crop" alt="Yusuf at Store">
+                    </div>
+                    <div class="about-text">
+                        <h3>A Passion for Precision</h3>
+                        <p>My name is Yusuf, and I established this shop in heart of Jogeshwari West with a singular vision: to bring authentic, high-end horology to Mumbai.</p>
+                        <p>At <strong>Yusuf Timepieces</strong>, we believe that every watch has a soul. We pride ourselves on transparency, genuine bills, and a lifetime of support.</p>
+                    </div>
+                </div>
+
+                <!-- NEW: VARIETY IN ABOUT -->
+                <div class="section-header" style="margin-top: 80px;">
+                    <h3>Our Specialization</h3>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 30px; text-align: center;">
+                    <div style="background: #fff; padding: 30px;">
+                        <i class="fas fa-gem" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
+                        <h4>Luxury Brands</h4>
+                        <p>Rolex, Omega, Audemars</p>
+                    </div>
+                    <div style="background: #fff; padding: 30px;">
+                        <i class="fas fa-anchor" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
+                        <h4>Dive & Sport</h4>
+                        <p>Seiko, Tudor, Tag Heuer</p>
+                    </div>
+                    <div style="background: #fff; padding: 30px;">
+                        <i class="fas fa-history" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
+                        <h4>Vintage Finds</h4>
+                        <p>Rare collector's items</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOG TAB -->
+        <section id="blog" class="tab-section">
+            <div class="container section-padding">
+                <div class="section-header">
+                    <h2>The Watch Journal</h2>
+                    <div class="gold-line"></div>
+                </div>
+                <div class="blog-grid">
+                    <article class="blog-card">
+                        <div class="blog-img"><img src="https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?q=80&w=1000" alt="Blog 1"></div>
+                        <div class="blog-content">
+                            <div class="blog-meta">Oct 12, 2026</div>
+                            <h3 class="blog-title">Why Mechanical Watches Will Never Die</h3>
+                            <p class="blog-excerpt">In an age of smartwatches... mechanical watches are living objects on your wrist.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-img"><img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1000" alt="Blog 2"></div>
+                        <div class="blog-content">
+                            <div class="blog-meta">Sep 28, 2026</div>
+                            <h3 class="blog-title">Investing in Time</h3>
+                            <p class="blog-excerpt">Not all watches lose value. We analyze the top models that appreciate.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT TAB -->
+        <section id="contact" class="tab-section">
+            <div class="container section-padding">
+                <div class="section-header">
+                    <h2>Get in Touch</h2>
+                    <div class="gold-line"></div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px;">
+                    <div class="contact-box">
+                        <h3 style="margin-bottom: 30px;">Contact Information</h3>
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div><h4>Store Address</h4><p>Deewan Center, Jogeshwari West, Mumbai</p></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div><h4>Call Yusuf</h4><p>+91 9619704901</p></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                            <div><h4>Email</h4><p>yusuf@gmail.com</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo" style="margin-bottom: 20px;">YUSUF</div>
+                    <p>Bringing the world's finest timepieces to Jogeshwari West.</p>
+                </div>
+                <div>
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="#" class="nav-trigger" data-target="home">Home</a></li>
+                        <li><a href="#" class="nav-trigger" data-target="shop">Collection</a></li>
+                        <li><a href="#" class="nav-trigger" data-target="cart">Cart</a></li>
+                        <li><a href="#" class="nav-trigger" data-target="contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-phone-alt" style="margin-right: 10px; color: var(--accent);"></i> 9619704901</li>
+                        <li><i class="fas fa-envelope" style="margin-right: 10px; color: var(--accent);"></i> yusuf@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 YUSUF TIMEPIECES. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- NEW: WHATSAPP FLOATING BUTTON -->
+    <!-- Dynamic Link to 8577883705 -->
+    <a href="https://wa.me/919619704901?text=Hello%20Yusuf,%20I%20am%20interested%20in%20buying%20a%20watch." class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Toast -->
+    <div id="toast">Added to your cart!</div>
+
+    <script>
+        $(document).ready(function() {
+            
+            // --- 1. LOAD CART FROM LOCALSTORAGE ---
+            let cart = JSON.parse(localStorage.getItem('yusufCart')) || [];
+            updateCartCount();
+
+            // 2. Tab Logic
+            function switchTab(targetId) {
+                $('.tab-section').removeClass('active');
+                $('#' + targetId).addClass('active');
+                
+                $('.nav-item').removeClass('active');
+                $('.nav-item[data-target="' + targetId + '"]').addClass('active');
+                
+                $('.nav-links').removeClass('active'); 
+                window.scrollTo(0, 0);
+
+                if(targetId === 'cart') {
+                    renderCart();
+                }
+            }
+
+            $('.nav-item').click(function() {
+                switchTab($(this).data('target'));
+            });
+
+            $('.nav-trigger').click(function(e) {
+                e.preventDefault();
+                switchTab($(this).data('target'));
+            });
+
+            // 3. Mobile Menu
+            $('.hamburger').click(function() {
+                $('.nav-links').toggleClass('active');
+            });
+
+            // 4. ADD TO CART LOGIC
+            $('.add-to-cart').click(function() {
+                let product = $(this).closest('.product-card');
+                let item = {
+                    id: Date.now(),
+                    name: product.data('name'),
+                    price: parseInt(product.data('price')),
+                    img: product.data('img')
+                };
+
+                cart.push(item);
+                localStorage.setItem('yusufCart', JSON.stringify(cart));
+                
+                updateCartCount();
+                showToast("Added to your cart!");
+            });
+
+            // 5. RENDER CART FUNCTION
+            function renderCart() {
+                let cartHtml = '';
+                let total = 0;
+
+                if (cart.length === 0) {
+                    cartHtml = `
+                        <div class="empty-cart-msg">
+                            <i class="fas fa-shopping-basket"></i>
+                            <h3>Your cart is empty</h3>
+                            <p>Go to the Collection tab to add some luxury watches.</p>
+                            <button class="btn nav-trigger" style="margin-top: 20px;" data-target="shop">Start Shopping</button>
+                        </div>
+                    `;
+                    $('#checkout-btn').prop('disabled', true);
+                } else {
+                    cartHtml = `<table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+                    
+                    cart.forEach(function(item, index) {
+                        total += item.price;
+                        cartHtml += `
+                            <tr>
+                                <td><img src="${item.img}" class="cart-img" alt="Watch"></td>
+                                <td><strong>${item.name}</strong></td>
+                                <td>₹ ${item.price.toLocaleString('en-IN')}</td>
+                                <td><button class="btn btn-danger remove-item" data-index="${index}">Remove</button></td>
+                            </tr>
+                        `;
+                    });
+
+                    cartHtml += `</tbody></table>`;
+                    $('#checkout-btn').prop('disabled', false);
+                }
+
+                $('#cart-content').html(cartHtml);
+                $('#cart-total').text('₹ ' + total.toLocaleString('en-IN'));
+            }
+
+            // 6. REMOVE ITEM LOGIC
+            $(document).on('click', '.remove-item', function() {
+                let index = $(this).data('index');
+                cart.splice(index, 1); 
+                localStorage.setItem('yusufCart', JSON.stringify(cart));
+                renderCart(); 
+                updateCartCount(); 
+                showToast("Item removed.");
+            });
+
+            // 7. UPDATE BADGE HELPER
+            function updateCartCount() {
+                $('#header-cart-count').text(cart.length);
+                $('#nav-cart-count').text(cart.length);
+            }
+
+            // 8. CHECKOUT BUTTON
+            $('#checkout-btn').click(function() {
+                showToast("Thank you! Checkout form is sent to your email.");
+            });
+
+            // Helper
+            function showToast(msg) {
+                const t = $('#toast');
+                t.text(msg);
+                t.addClass('show');
+                setTimeout(() => { t.removeClass('show'); }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
